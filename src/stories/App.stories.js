@@ -1,6 +1,7 @@
 import React from "react";
 import App from "../App";
 import "../index.css";
+import "./App.stories.css";
 
 export default {
   title: "<App>",
@@ -8,4 +9,8 @@ export default {
 
 const useWindowTitleMock = () => ["foobar"];
 
-export const main = () => <App useWindowTitle={useWindowTitleMock} />;
+export const main = () => (
+  <div class="container">
+    <App useWindowTitle={useWindowTitleMock} />
+  </div>
+);
