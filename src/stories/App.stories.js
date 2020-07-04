@@ -1,5 +1,6 @@
 import React from "react";
 import App from "../App";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css";
 import "./App.stories.css";
 
@@ -10,7 +11,7 @@ export default {
 const useWindowTitleMock = () => ["foobar"];
 
 export const main = () => (
-  <div class="container">
+  <div class="story-container">
     <App useWindowTitle={useWindowTitleMock} />
   </div>
 );
