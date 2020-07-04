@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useWindowTitle = () => {
+export const useGitBranchCommand = () => {
   const [windowTitle, setWindowTitle] = useState();
   useEffect(() => {
     if (windowTitle === undefined) {

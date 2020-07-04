@@ -1,17 +1,33 @@
 import React from "react";
 import App from "../App";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../index.css";
 import "./App.stories.css";
 
 export default {
   title: "<App>",
 };
 
-const useWindowTitleMock = () => ["foobar"];
+const useGitBranchCommandMock = (command) => () => [command];
 
-export const main = () => (
-  <div class="story-container">
-    <App useWindowTitle={useWindowTitleMock} />
-  </div>
+export const SingleLine = () => (
+  <App
+    useGitBranchCommand={useGitBranchCommandMock(
+      'git checkout -b "issue/short"'
+    )}
+  />
+);
+
+export const MultiLines = () => (
+  <App
+    useGitBranchCommand={useGitBranchCommandMock(
+      'git checkout -b "issue/foobar-is-a-long-window-title-ass-with-multiple-lines-on-it-such-that-it-roughly-has-3-lines"'
+    )}
+  />
+);
+
+export const SuperLong = () => (
+  <App
+    useGitBranchCommand={useGitBranchCommandMock(
+      'git checkout -b "issue/foobar-is-a-long-window-title-ass-with-multiple-lines-on-it-such-that-it-roughly-has-more-than-3-lines-and-it-keep-going-to-the-bottom-push-push-push"'
+    )}
+  />
 );
