@@ -2,7 +2,6 @@ import React from "react";
 import { useGitBranchCommand as useGitBranchCommandDI } from "./git-branch-command";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import CheckIcon from "./CheckIcon";
 
 const App = ({ useGitBranchCommand = useGitBranchCommandDI }) => {
   const [gitBranchCommand] = useGitBranchCommand();
@@ -20,7 +19,7 @@ const App = ({ useGitBranchCommand = useGitBranchCommandDI }) => {
           </pre>
         </div>
       </div>
-      <div class="row mb-2">
+      <div class="row mb-3">
         <div class="col-12 d-flex justify-content-end">
           <button type="button" class="btn btn-sm btn-secondary mr-2">
             Copy
