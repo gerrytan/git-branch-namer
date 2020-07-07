@@ -1,4 +1,4 @@
-# Git branch namer
+# git-branch-namer
 
 Chrome extension to generate git branch name from active tab's window title
 
