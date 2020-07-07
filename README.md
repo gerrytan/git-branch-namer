@@ -2,6 +2,8 @@
 
 Generate git branch name from active tab's window title
 
+![screenshot](/screenshot.jpg)
+
 ## Local development setup
 
 1. `yarn build`
