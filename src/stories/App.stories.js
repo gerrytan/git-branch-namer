@@ -31,3 +31,7 @@ export const SuperLong = () => (
     )}
   />
 );
+
+export const Loading = () => (
+  <App useGitBranchCommand={useGitBranchCommandMock(undefined)} />
+);

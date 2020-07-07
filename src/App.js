@@ -16,7 +16,7 @@ const App = ({ useGitBranchCommand = useGitBranchCommandDI }) => {
       <div class="row">
         <div class="col-12">
           <pre class="p-2 border border-dark bg-light rounded text-wrap mh-98">
-            {gitBranchCommand}
+            {gitBranchCommand ? gitBranchCommand : "Loading..."}
           </pre>
         </div>
       </div>
