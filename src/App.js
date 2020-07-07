@@ -20,8 +20,8 @@ const App = ({ useGitBranchCommand = useGitBranchCommandDI }) => {
           </pre>
         </div>
       </div>
-      <div class="row">
-        <div class="d-flex justify-content-end col-12">
+      <div class="row mb-2">
+        <div class="col-12 d-flex justify-content-end">
           <button type="button" class="btn btn-sm btn-secondary mr-2">
             Copy
           </button>
