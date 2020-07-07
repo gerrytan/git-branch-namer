@@ -28,7 +28,9 @@ export const useGitBranchCommand = () => {
       // eslint-disable-next-line no-undef
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         let windowTitle = tabs[0].title;
-        const url = tabs[0].url; // "https://foobar.atlassian.net/browse/APPY-2"
+
+        // Useful to apply string replace only to some domain
+        const url = tabs[0].url; // ex: "https://foobar.atlassian.net/browse/APPY-2"
 
         // apply custom string replacements
         config.strReplaces.forEach((strReplace) => {
