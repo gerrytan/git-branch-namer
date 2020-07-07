@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useGitBranchCommand as useGitBranchCommandDI } from "./git-branch-command";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 const App = ({ useGitBranchCommand = useGitBranchCommandDI }) => {
   const [gitBranchCommand] = useGitBranchCommand();
+
+  const onCopyClick = useCallback(() => {
+    navigator.clipboard.writeText(gitBranchCommand);
+  }, [gitBranchCommand]);
+
   return (
     <div className="container">
       <div class="row">
@@ -21,12 +26,17 @@ const App = ({ useGitBranchCommand = useGitBranchCommandDI }) => {
       </div>
       <div class="row mb-3">
         <div class="col-12 d-flex justify-content-end">
-          <button type="button" class="btn btn-sm btn-secondary mr-2">
+          <button
+            type="button"
+            class="btn btn-sm btn-secondary"
+            onClick={onCopyClick}
+          >
             Copy
           </button>
+          {/* Coming soon 🤞
           <button type="button" class="btn btn-sm btn-light">
             Config
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
