@@ -1,6 +1,6 @@
 # Git branch namer
 
-Generate git branch name from active tab's window title
+Chrome extension to generate git branch name from active tab's window title
 
 ![screenshot](/screenshot.jpg)
 
