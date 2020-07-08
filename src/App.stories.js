@@ -1,9 +1,13 @@
 import React from "react";
-import App from "../App";
-import "./App.stories.css";
+import App from "./App";
+
+const MockPopup = ({ children }) => (
+  <div style={{ border: "2px solid #DC3545", width: 400 }}>{children}</div>
+);
 
 export default {
   title: "<App>",
+  decorators: [(storyFn) => <MockPopup>{storyFn()}</MockPopup>],
 };
 
 const useGitBranchCommandMock = (command) => () => [command];

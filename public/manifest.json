@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "git-branch-namer",
-  "version": "1.0",
+  "version": "0.0.1",
 
   "description": "Generate a git branch command from the page you're viewing",
 
