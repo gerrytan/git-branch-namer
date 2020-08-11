@@ -4,6 +4,10 @@ Chrome extension to generate git branch name from active tab's window title
 
 ![screenshot](/screenshot20200708.jpg)
 
+## Installation
+
+Get it from [Chrome Web Store](https://chrome.google.com/webstore/detail/git-branch-namer/blloglbppemlmiibincgieehfdjlladd)
+
 ## Local development setup
 
 1. `yarn build`
