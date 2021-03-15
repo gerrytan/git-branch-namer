@@ -13,5 +13,16 @@
     "default_popup": "index.html"
   },
 
-  "permissions": ["activeTab"]
+  "permissions": ["activeTab"],
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.atlassian.net/*",
+        "https://*.jira.com/*",
+        "https://*.jira-dev.com/*"
+      ],
+      "js": ["contentScript.js"]
+    }
+  ]
 }

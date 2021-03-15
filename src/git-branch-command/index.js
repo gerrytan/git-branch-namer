@@ -19,34 +19,78 @@ export const windowTitle2BranchName = (windowTitle) => {
     .replace(/[^\w-]/g, ""); // only allow A-Za-z0-9-_, strip all other characters
 };
 
+export const issueKeyFromUrl = (url) => {
+  let match;
+
+  // Classic board URL
+  match = url.match(/RapidBoard.jspa.*selectedIssue=([^&]+)/);
+  if (match && match.length >= 2) {
+    return match[1];
+  }
+
+  // Nextgen board URL
+  match = url.match(/jira\/software\/projects.*selectedIssue=([^&]+)/);
+  if (match && match.length >= 2) {
+    return match[1];
+  }
+
+  // Browse URL
+  match = url.match(/browse\/([^/]+)/);
+  if (match && match.length >= 2) {
+    return match[1];
+  }
+
+  return undefined;
+};
+
 export const useGitBranchCommand = () => {
-  const [gitBranchCommand, setGitBranchCommand] = useState();
-  useEffect(() => {
-    if (gitBranchCommand === undefined) {
-      // how to apply https://stackoverflow.com/questions/48584556/eslint-chrome-is-not-defined-no-undef
-      // and extend eslint in create-react-app?
-      // eslint-disable-next-line no-undef
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        let windowTitle = tabs[0].title;
-
-        // Useful to apply string replace only to some domain
-        const url = tabs[0].url; // ex: "https://foobar.atlassian.net/browse/APPY-2"
-
-        // apply custom string replacements
-        config.strReplaces.forEach((strReplace) => {
-          windowTitle = windowTitle.replace(
-            strReplace.regexOrSubstr,
-            strReplace.replacement
-          );
-        });
-
-        const branchName = windowTitle2BranchName(windowTitle);
-
-        setGitBranchCommand(
-          `${config.branchCommand} "${config.branchPrefix}${branchName}"`
-        );
-      });
-    }
+  const [issueKeyAndSummary, setIssueKeyAndSummary] = useState({
+    issueKey: undefined,
+    summary: undefined,
+    fetchInProgress: false,
+    fetchComplete: false,
   });
-  return [gitBranchCommand];
+
+  const {
+    issueKey,
+    summary,
+    fetchInProgress,
+    fetchComplete,
+  } = issueKeyAndSummary;
+
+  if (!fetchInProgress && !fetchComplete) {
+    setIssueKeyAndSummary({ ...issueKeyAndSummary, fetchInProgress: true });
+
+    // eslint-disable-next-line no-undef
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      const issueKey = issueKeyFromUrl(tabs[0].url);
+
+      // eslint-disable-next-line no-undef
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        { command: "SUMMARY" },
+        function (response) {
+          console.log("received response:");
+          console.log(response);
+          setIssueKeyAndSummary({
+            ...issueKeyAndSummary,
+            issueKey,
+            // TODO this needs a more appropriate name
+            summary: windowTitle2BranchName(response.summary),
+            fetchInProgress: false,
+            fetchComplete: true,
+          });
+        }
+      );
+    });
+  }
+
+  // Strip punctuation, replace whitespaces with dash, etc.
+  const normalisedSummary = summary;
+
+  return [
+    fetchComplete
+      ? `${config.branchCommand} "${config.branchPrefix}${issueKey}-${normalisedSummary}"`
+      : undefined,
+  ];
 };
