@@ -1,5 +1,13 @@
 # git-branch-namer
 
+## Deprecated
+
+This project has been deprecated in favour of in-product git checkout command available on Jira Cloud
+
+![screenshot](/jira-cloud-in-product-checkout-namer.png)
+
+## Overview
+
 Chrome extension to generate git branch name from active tab's window title
 
 ![screenshot](/screenshot20200708.jpg)
